@@ -16,6 +16,45 @@ def get_runscript_from_workflow (workdir, workflow_run, workflow_data):
 def get_runscript_from_code (workdir, environment, pre_instruction, code, inputs, outputs, instruction):
     runscript_file = None
 
+    # Create runscript_file
+    runscript_file = open (str(workdir) + "/run_me.sh", "w")
+    runscript_file.write("#!/bin/bash\n\n")
+
+    # Set error handler: if any command returns other value than exit(0) in the script, stops the script
+    runscript_file.write("# Error handler\n")
+    runscript_file.write("set -e\n\n")
+
+    # Prepare environment
+    # TODO
+    runscript_file.write("# Environment\n")
+
+    # Download code
+    runscript_file.write("# Code\n")
+    runscript_file.write("wget -N " + str(code['url']) + " " + str(code['path']) + "\n\n")
+
+    # Download outputs
+    runscript_file.write("# Outputs\n")
+    for iouput in outputs:
+        runscript_file.write("wget -N " + str(iouput['url']) + " " + str(iouput['path']) + "\n\n")
+
+    # Pre-instructions
+    # Raw instructions, no classification with untar, compile, move, install, post-install ...
+    runscript_file.write("# Pre-instructions\n")
+    for ipreinstr in pre_instruction:
+        runscript_file.write(str(ipreinstr) + "\n\n")
+
+    # Download inputs
+    runscript_file.write("# Inputs\n")
+    for iinput in inputs:
+        runscript_file.write("wget -N " + str(iinput['url']) + " " + str(iinput['path']) + "\n\n")
+
+    # Run
+    runscript_file.write("# RUN\n")
+    runscript_file.write(str(instruction) + "\n\n")
+
+    # Close file
+    runscript_file.close()
+
     return runscript_file
 
 if __name__ == "__main__":
