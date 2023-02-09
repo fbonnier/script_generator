@@ -7,7 +7,7 @@ NARGS=$(($#-1))
 for (( iarg=1; iarg<=NARGS; iarg++)); do
     jarg=$((iarg+1))
 
-    if [ ${!iarg} == "--json" ]
+    if [ "${!iarg}" == "--json" ]
         then
             JSON_PATH=${!jarg}
     fi

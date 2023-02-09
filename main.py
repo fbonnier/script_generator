@@ -131,4 +131,4 @@ if __name__ == "__main__":
     # model_instance.close_script_file()
     # print (model_instance.metadata)
     # Exit Done ?
-    print ("Done.\n ----- Exit SUCCESS")
+    sys.exit()
