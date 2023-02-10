@@ -105,7 +105,7 @@ if __name__ == "__main__":
     runscript_file = None
 
     # Write runscript file from workflow
-    runscript_file = get_runscript_from_workflow (workdir, environment, workflow_run_file, workflow_data_file)
+    runscript_file = get_runscript_from_workflow (workdir, workflow_run_file, workflow_data_file)
 
     # Write runscript file from runscript
     if (not runscript_file):
