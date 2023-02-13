@@ -48,9 +48,17 @@ def get_runscript_from_code (workdir, environment, pre_instruction, code, inputs
     for iinput in inputs:
         runscript_file.write("wget -N " + str(iinput['url']) + " " + str(iinput['path']) + "\n\n")
 
+    # Start watchdog
+    runscript_file.write("# Start Watchdog\n")
+    runscript_file.write("watchmedo shell-command --command='echo \"${watch_src_path} ${watch_dest_path}\" >> watchdog_log.txt' --patterns="*" --ignore-patterns='watchdog_log.txt' --ignore-directories --recursive "+str(workdir)+" & WATCHDOG_PID=$!;\n\n")
+
     # Run
     runscript_file.write("# RUN\n")
     runscript_file.write(str(instruction) + "\n\n")
+
+    # Stop Watchdog
+    runscript_file.write("# Stop Watchdog\n")
+    runscript_file.write("kill --signal 9 \"${WATCHDOG_PID}\";\n\n")
 
     # Close file
     runscript_file.close()
