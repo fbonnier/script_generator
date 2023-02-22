@@ -3,9 +3,7 @@ import sys
 import argparse
 import json as json
 import warnings
-# from check_model import instance_kgv2 as instance2
-# from check_model import instance_kgv3 as instance3
-# from check_model import instance as instance
+import re
 
 def get_runscript_from_workflow (workdir, workflow_run, workflow_data):
     runscript_file = None
@@ -72,9 +70,6 @@ if __name__ == "__main__":
     parser.add_argument("--json", type=argparse.FileType('r'), metavar="JSON Metadata file", nargs=1, dest="json", default="",\
     help="JSON File that contains Metadata of the HBP model to run")
 
-    # parser.add_argument("--kg", type=int, metavar="KG Version", nargs=1, dest="kg", default=int(os.environ.get("KG_VERSION", 2)),\
-    # help="Version number of Knowledge Graph to use")
-
     args = parser.parse_args()
 
 
@@ -119,24 +114,4 @@ if __name__ == "__main__":
     if (not runscript_file):
         runscript_file = get_runscript_from_code (workdir, environment, pre_instruction, code, inputs, outputs, instruction)
 
-    # model_instance = None
-    ## Create Instance object
-    # model_instance = instance3.KGV3_Instance(model_id, token=auth_token)
-    # model_instance = instance.Instance(json_file.name)
-
-
-    # model_instance.create_script_file(work_dir)
-    # model_instance.write_code_location()
-    # model_instance.write_code_unzip ()
-    # model_instance.write_goto_project_folder()
-    # model_instance.write_download_inputs()
-    # model_instance.write_pip_installs()
-    # # model_instance.write_download_results()
-
-    # model_instance.write_watchdog()
-    # model_instance.write_code_run()
-    # model_instance.write_watchdog_kill()
-    # model_instance.close_script_file()
-    # print (model_instance.metadata)
-    # Exit Done ?
     sys.exit()
