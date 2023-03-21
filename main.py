@@ -17,6 +17,7 @@ def get_runscript_from_code (workdir, environment, pre_instruction, instruction)
     # Create runscript_file
     runscript_file = open (str(workdir) + "/run_me.sh", "w")
     runscript_file.write("#!/bin/bash\n\n")
+    runscript_file.write("ls */*\n\n")
 
     # Set error handler: if any command returns other value than exit(0) in the script, stops the script
     runscript_file.write("# Error handler\n")
