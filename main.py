@@ -11,7 +11,7 @@ def get_runscript_from_workflow (workdir, workflow_run, workflow_data):
         pass
     return runscript_file 
 
-def get_runscript_from_code (workdir, environment, pre_instruction, code, inputs, outputs, instruction):
+def get_runscript_from_code (workdir, environment, pre_instruction, instruction):
     runscript_file = None
 
     # Create runscript_file
@@ -26,15 +26,6 @@ def get_runscript_from_code (workdir, environment, pre_instruction, code, inputs
     # TODO
     runscript_file.write("# Environment\n")
 
-    # Download code
-    runscript_file.write("# Code\n")
-    runscript_file.write("wget -N " + str(code['url']) + " " + str(code['path']) + "\n\n")
-
-    # Download outputs
-    runscript_file.write("# Outputs\n")
-    for iouput in outputs:
-        runscript_file.write("wget -N " + str(iouput['url']) + " " + str(iouput['path']) + "\n\n")
-
     # Pre-instructions
     # Raw instructions, no classification with untar, compile, move, install, post-install ...
     runscript_file.write("# Pre-instructions\n")
@@ -42,9 +33,9 @@ def get_runscript_from_code (workdir, environment, pre_instruction, code, inputs
         runscript_file.write(str(ipreinstr) + "\n\n")
 
     # Download inputs
-    runscript_file.write("# Inputs\n")
-    for iinput in inputs:
-        runscript_file.write("wget -N " + str(iinput['url']) + " " + str(iinput['path']) + "\n\n")
+    # runscript_file.write("# Inputs\n")
+    # for iinput in inputs:
+        # runscript_file.write("wget -N " + str(iinput['url']) + " " + str(iinput['path']) + "\n\n")
 
     # Start watchdog
     runscript_file.write("# Start Watchdog\n")
@@ -100,7 +91,7 @@ if __name__ == "__main__":
     pre_instruction = json_data["Metadata"]["run"]["pre-instruction"]
 
     # Load code
-    code = { "url": json_data["Metadata"]["run"]["url"], "path": json_data["Metadata"]["run"]["path"]}
+    code = { "url": json_data["Metadata"]["run"]["code"]["url"], "path": json_data["Metadata"]["run"]["code"]["path"]}
 
     # Load instruction
     instruction = json_data["Metadata"]["run"]["instruction"]
@@ -112,6 +103,6 @@ if __name__ == "__main__":
 
     # Write runscript file from runscript
     if (not runscript_file):
-        runscript_file = get_runscript_from_code (workdir, environment, pre_instruction, code, inputs, outputs, instruction)
+        runscript_file = get_runscript_from_code (workdir, environment, pre_instruction, instruction)
 
     sys.exit()
