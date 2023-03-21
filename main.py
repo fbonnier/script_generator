@@ -79,10 +79,10 @@ if __name__ == "__main__":
     workflow_data_file = json_data["Metadata"]["workflow"]["data"]
 
     # Load inputs
-    inputs = json_data["Metadata"]["run"]["inputs"]
+    # inputs = json_data["Metadata"]["run"]["inputs"]
 
     # Load outputs
-    outputs = json_data["Metadata"]["run"]["outputs"]
+    # outputs = json_data["Metadata"]["run"]["outputs"]
 
     # Load environment
     environment = json_data["Metadata"]["run"]["environment"]
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     pre_instruction = json_data["Metadata"]["run"]["pre-instruction"]
 
     # Load code
-    code = { "url": json_data["Metadata"]["run"]["code"]["url"], "path": json_data["Metadata"]["run"]["code"]["path"]}
+    # code = { "url": json_data["Metadata"]["run"]["code"]["url"], "path": json_data["Metadata"]["run"]["code"]["path"]}
 
     # Load instruction
     instruction = json_data["Metadata"]["run"]["instruction"]
