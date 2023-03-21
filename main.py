@@ -29,8 +29,8 @@ def get_runscript_from_code (workdir, environment, pre_instruction, instruction)
     # Pre-instructions
     # Raw instructions, no classification with untar, compile, move, install, post-install ...
     runscript_file.write("# Pre-instructions\n")
-    for ipreinstr in pre_instruction:
-        runscript_file.write(str(ipreinstr) + "\n\n")
+    # for ipreinstr in pre_instruction:
+    runscript_file.write(str(pre_instruction) + "\n\n")
 
     # Download inputs
     # runscript_file.write("# Inputs\n")
