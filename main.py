@@ -50,7 +50,7 @@ def get_runscript_from_code (workdir, environment, pre_instruction, instruction)
 
     # Stop Watchdog
     runscript_file.write("# Stop Watchdog\n")
-    runscript_file.write("kill --signal 9 \"${WATCHDOG_PID}\";\n\n")
+    runscript_file.write("kill -s 9 \"${WATCHDOG_PID}\";\n\n")
 
     # Close file
     runscript_file.close()
