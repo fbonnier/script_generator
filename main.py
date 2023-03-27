@@ -52,6 +52,10 @@ def get_runscript_from_code (workdir, environment, pre_instruction, instruction)
     runscript_file.write("# Stop Watchdog\n")
     runscript_file.write("kill -s 9 \"${WATCHDOG_PID}\";\n\n")
 
+    # Extract watchdog files and add output files to JSON report
+    # runscript_file.write("# Extract watchdog files and add output files to JSON report\n")
+    # runscript_file.write("hbp_extract_watchdog --json " + str (json_file) + " --watchdog watchdog_log.txt;\n\n")
+
     # Close file
     runscript_file.close()
 
